@@ -12,12 +12,7 @@ module Graphics = G
     drawing routines into absolute positions on the screen.
 
     The graphics context also includes other information for basic
-    drawing (such as the current pen color.)
-
-    Note that this module defines a persistent (immutable) data
-    structure. The operations here use a given graphics context to create
-    a new one with the specified characteristics. They do not modify
-    their arguments. *)
+    drawing (such as the current pen color.) *)
 
 
 (****************)
@@ -43,7 +38,7 @@ let magenta : color = {r=255;g=0;  b=255}
 
 (** The main type of graphics contexts. Note that none of the components
     are mutable. *)
-(* TODO: You will need to modify this type definition for Task  5. *)
+
 type gctx = {
   x: int;         (** offset from (0,0) in local coordinates *)
   y: int;
@@ -103,7 +98,7 @@ let with_thickness (g: gctx) (t: int) : gctx =
 
     Initially, this just sets the current pen color.
 *)
-(* TODO: You will need to modify this definition for Task 5. *)
+
 let set_graphics_state (gc: gctx) : unit =
   let c = gc.color in
   let thickness = gc.thickness in
@@ -183,8 +178,7 @@ let draw_string (g: gctx) (p: position) (s: string) : unit =
 
 (** Display a rectangle with lower-left corner at position
     with the specified dimension. *)
-(* TODO: you will need to make this function actually draw a
-   rectangle for Task 0.                                                  *)
+                                             
 let draw_rect (g: gctx) (p1: position) ((w, h): dimension): unit =
   set_graphics_state g;
   let (x1, y1) = ocaml_coords g p1 in
@@ -219,9 +213,6 @@ let text_size (text: string) : dimension =
   let (w,h) = Graphics.text_size text in
   (w+1, h)  (* Web browser font widths seem to be smaller than desirable *)
 
-
-(* TODO: You will need to add several "wrapped" versions of ocaml graphics *)
-(* functions here for Tasks 2, 4, and possibly 5 and 6 *)
 
 let draw_point (g: gctx) (p: position) : unit = 
   set_graphics_state g; 
