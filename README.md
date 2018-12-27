@@ -23,3 +23,4 @@ how big it is (size).
 We handle clicks inside of the canvas using the paint_action function. This funcion is added as an event_listener to the canvas via its controller, paint_canvas_controller. This means that whenever an event (the ones defined in gctx.ml!) occurs in the canvas, the paint_action function is called.
 
 To implement this, we define two drawing modes: LineStartMode and LineEndMode. A user's first click sets the start point of the line and switches the mode; the second click sets the end point and switches the mode back. This handling of MouseDown events is written in paint_action. We keep track of the first point by sticking it into the LineEndMode constructor; after we get the second click, we add the line to state.shapes, then we go back to LineStartMode. (Notice that we use state.color as the color component of the stored line.)
+
