@@ -36,9 +36,6 @@ let magenta : color = {r=255;g=0;  b=255}
 (** Basic Gctx operations      *)
 (*******************************)
 
-(** The main type of graphics contexts. Note that none of the components
-    are mutable. *)
-
 type gctx = {
   x: int;         (** offset from (0,0) in local coordinates *)
   y: int;
@@ -129,8 +126,6 @@ let graphics_size_y () =
 (** A widget-relative position *)
 type position = int * int
 
-(* ALWAYS call these functions before passing widget-local points to the   *)
-(* OCaml native Graphics module or vice-versa.                             *)
 
 (** Convert widget-local coordinates (x,y) to OCaml graphics
     coordinates, relative to the graphics context.                         *)
@@ -195,8 +190,7 @@ let fill_rect (g: gctx) (p1: position) ((w, h): dimension): unit =
   
 
 (** Draw an ellipse at the given position with the given radii *)
-(* TODO: you will need to make this function actually draw an
-   ellipse for Task 0.  *)
+
 let draw_ellipse (g: gctx) (p: position) (rx: int) (ry: int): unit =
  set_graphics_state g;
   let (x1, y1) = ocaml_coords g p in
@@ -230,8 +224,6 @@ let draw_point (g: gctx) (p: position) : unit =
 (** {1 Event Handling } *)
 (************************)
 
-(* This part of the module adapts OCaml's native event handling to     *)
-(* something that more closely resembles that found in Java.           *)
 
 (** Types of events that could occur *)
 type event_type =
