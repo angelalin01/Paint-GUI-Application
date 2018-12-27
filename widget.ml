@@ -82,13 +82,7 @@ let vpair (w1: widget) (w2: widget) : widget =
           let (x2,y2) = w2.size () in (max x1 x2, y1 + y2))
    }
 
-(* Note: the OCaml List module has a function fold_right (List.fold_right).
-   Note the order of the arguments (which is different
-   from previous homeworks).
-   Also, you will see that there is a fold_left function, you
-   may want to think about what this does, and how it's different
-   from the fold you're used to.
-*)
+
 let list_layout (pair: widget -> widget -> widget)
          (ws: widget list) : widget =
   
@@ -139,7 +133,6 @@ let label (s: string) : widget * label_controller =
 
 type event_listener = Gctx.gctx -> Gctx.event -> unit
 
-(* Below we define two special forms of event_listeners. *)
 
 (** Performs an action upon receiving a mouse click. *)
 let mouseclick_listener (action: unit -> unit) : event_listener =
@@ -217,7 +210,6 @@ let canvas (dim: Gctx.dimension) (paint : Gctx.gctx -> unit)
 (*****************************************)
 (** {1   Checkbox                      } *)
 (*****************************************)
-(* TODO: Task 5 requires you to develop a checkbox widget *)
 
 (** A checkbox is a controller for a value associated with a widget.
 
@@ -230,10 +222,8 @@ type 'a value_controller = {
   change_value        : 'a -> unit
 }
 
-(** TODO: The first part of task 5 requires you to implement the following
-    generic function. This function takes a value of type 'a and returns a
-    value controller for it. Carefully consider what state needs to be
-    associated with any value controller. *)
+(** This function takes a value of type 'a and returns a
+    value controller for it. *)
 let make_control (v: 'a) : 'a value_controller =
   let v = {contents = v} in
   let listeners = {contents = []} in
@@ -247,9 +237,6 @@ let make_control (v: 'a) : 'a value_controller =
   value_controller
   
 
-
-(** TODO: Don't forget to use the helper function you defined above when
-    implementing the checkbox function! *)
 let checkbox (init: bool) (s: string)
   : widget * bool value_controller =
   let bool_value_controller = make_control init in
@@ -278,7 +265,6 @@ let checkbox (init: bool) (s: string)
 (** {1   Additional widgets            } *)
 (*****************************************)
 
-(* TODO: In Task 6 you may choose to add a radio_button widget, color slider *)
 
 let slider (c: Gctx.color)(init: int)(label: string) : widget * int value_controller = 
   let int_value_controller = make_control init in 
